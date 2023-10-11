@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+void drawLine(int x1, int y1, int x2, int y2) {
+    int dx, dy, steps;
+    float xIncrement, yIncrement, x, y;
+
+    dx = x2 - x1;
+    dy = y2 - y1;
+
+    if (abs(dx) > abs(dy)) {
+        steps = abs(dx);
+    } else {
+        steps = abs(dy);
+    }
+
+    xIncrement = float(dx) / steps;
+    yIncrement = float(dy) / steps;
+
+    x = x1;
+    y = y1;
+
+    cout << "Coordinates on the line:" << endl;
+
+    for (int i = 0; i <= steps; i++) {
+        cout << "(" << round(x) << ", " << round(y) << ")" << endl;
+        x += xIncrement;
+        y += yIncrement;
+    }
+}
+
+int main() {
+    int x1, y1, x2, y2;
+
+    cout << "Enter the coordinates of the first point (x1 y1): ";
+    cin >> x1 >> y1;
+    cout << "Enter the coordinates of the second point (x2 y2): ";
+    cin >> x2 >> y2;
+
+    drawLine(x1, y1, x2, y2);
+
+    return 0;
+}
