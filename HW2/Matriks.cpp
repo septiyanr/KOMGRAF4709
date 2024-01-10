@@ -1,87 +1,93 @@
 #include <iostream>
-#include <vector>
 
-std::vector<std::vector<int>> tambahMatriks(const std::vector<std::vector<int>>& matriks1, const std::vector<std::vector<int>>& matriks2) {
-    int baris = matriks1.size();
-    int kolom = matriks1[0].size();
+using namespace std;
 
-    std::vector<std::vector<int>> hasil(baris, std::vector<int>(kolom, 0));
 
-    for (int i = 0; i < baris; ++i) {
-        for (int j = 0; j < kolom; ++j) {
+void tambahMatriks(int matriks1[2][2], int matriks2[2][2], int hasil[2][2]) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
             hasil[i][j] = matriks1[i][j] + matriks2[i][j];
         }
     }
-
-    return hasil;
 }
 
-std::vector<std::vector<int>> kurangMatriks(const std::vector<std::vector<int>>& matriks1, const std::vector<std::vector<int>>& matriks2) {
-    int baris = matriks1.size();
-    int kolom = matriks1[0].size();
 
-    std::vector<std::vector<int>> hasil(baris, std::vector<int>(kolom, 0));
-
-    for (int i = 0; i < baris; ++i) {
-        for (int j = 0; j < kolom; ++j) {
+void kurangMatriks(int matriks1[2][2], int matriks2[2][2], int hasil[2][2]) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
             hasil[i][j] = matriks1[i][j] - matriks2[i][j];
         }
     }
-
-    return hasil;
 }
 
-std::vector<std::vector<int>> kaliMatriks(const std::vector<std::vector<int>>& matriks1, const std::vector<std::vector<int>>& matriks2) {
-    int baris1 = matriks1.size();
-    int kolom1 = matriks1[0].size();
-    int kolom2 = matriks2[0].size();
 
-    std::vector<std::vector<int>> hasil(baris1, std::vector<int>(kolom2, 0));
-
-    for (int i = 0; i < baris1; ++i) {
-        for (int j = 0; j < kolom2; ++j) {
-            for (int k = 0; k < kolom1; ++k) {
-                hasil[i][j] += matriks1[i][k] * matriks2[k][j];
-            }
-        }
-    }
-
-    return hasil;
-}
-
-void cetakMatriks(const std::vector<std::vector<int>>& matriks) {
-    int baris = matriks.size();
-    int kolom = matriks[0].size();
-
-    for (int i = 0; i < baris; ++i) {
-        for (int j = 0; j < kolom; ++j) {
-            std::cout << matriks[i][j] << " ";
-        }
-        std::cout << "\n";
-    }
+void kaliMatriks(int matriks1[2][2], int matriks2[2][2], int hasil[2][2]) {
+    hasil[0][0] = (matriks1[0][0] * matriks2[0][0]) + (matriks1[0][1] * matriks2[1][0]);
+    hasil[0][1] = (matriks1[0][0] * matriks2[0][1]) + (matriks1[0][1] * matriks2[1][1]);
+    hasil[1][0] = (matriks1[1][0] * matriks2[0][0]) + (matriks1[1][1] * matriks2[1][0]);
+    hasil[1][1] = (matriks1[1][0] * matriks2[0][1]) + (matriks1[1][1] * matriks2[1][1]);
 }
 
 int main() {
-    std::vector<std::vector<int>> matriks1 = {{1, 2}, {3, 4}};
-    std::vector<std::vector<int>> matriks2 = {{5, 6}, {7, 8}};
+    int matriks1[2][2];
+    int matriks2[2][2];
+    int hasil[2][2];
+    int pilihan;
 
-    std::cout << "Matriks 1:\n";
-    cetakMatriks(matriks1);
+    
+    cout << "Pilih operasi: " << endl;
+    cout << "1. Penjumlahan" << endl;
+    cout << "2. Pengurangan" << endl;
+    cout << "3. Perkalian" << endl;
+    cin >> pilihan;
 
-    std::cout << "Matriks 2:\n";
-    cetakMatriks(matriks2);
+   
+    cout << "Masukkan angka matriks pertama (baris 1, kolom 1): ";
+    cin >> matriks1[0][0];
+    cout << "Masukkan angka matriks pertama (baris 1, kolom 2): ";
+    cin >> matriks1[0][1];
+    cout << "Masukkan angka matriks pertama (baris 2, kolom 1): ";
+    cin >> matriks1[1][0];
+    cout << "Masukkan angka matriks pertama (baris 2, elemen 2): ";
+    cin >> matriks1[1][1];
 
-    std::cout << "Hasil penjumlahan matriks:\n";
-    auto hasilTambah = tambahMatriks(matriks1, matriks2);
-    cetakMatriks(hasilTambah);
+    
+    cout << "Masukkan angka matriks kedua (baris 1, kolom 1): ";
+    cin >> matriks2[0][0];
+    cout << "Masukkan angka matriks kedua (baris 1, kolom 2): ";
+    cin >> matriks2[0][1];
+    cout << "Masukkan angka matriks kedua (baris 2, kolom 1): ";
+    cin >> matriks2[1][0];
+    cout << "Masukkan angka matriks kedua (baris 2, kolom 2): ";
+    cin >> matriks2[1][1];
 
-    std::cout << "Hasil pengurangan matriks:\n";
-    auto hasilKurang = kurangMatriks(matriks1, matriks2);
-    cetakMatriks(hasilKurang);
+    switch (pilihan) {
+        case 1:
+            
+            tambahMatriks(matriks1, matriks2, hasil);
+            cout << "Hasil tambah:" << endl;
+            break;
+        case 2:
+            
+            kurangMatriks(matriks1, matriks2, hasil);
+            cout << "Hasil kurang:" << endl;
+            break;
+        case 3:
+            
+            kaliMatriks(matriks1, matriks2, hasil);
+            cout << "Hasil kali:" << endl;
+            break;
+        default:
+            cout << "Pilihan salah" << endl;
+            return 1;
+    }
 
-    std::cout << "Hasil perkalian matriks:\n";
-    auto hasilKali = kaliMatriks(matriks1, matriks2);
-    cetakMatriks(hasilKali);
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            cout << hasil[i][j] << " ";
+        }
+        cout << endl;
+    }
 
     return 0;
 }
